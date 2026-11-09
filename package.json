@@ -1,0 +1,42 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TaskFlow — учебный проект: приложение (ПМ.02) и администрирование БД (ПМ.11)",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "test:server": "npm --prefix server run test",
+    "typecheck:server": "npm --prefix server exec tsc -- --noEmit",
+    "typecheck:client": "npm --prefix client exec tsc -- --noEmit"
+  },
+  "lint-staged": {
+    "server/**/*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "client/**/*.{ts,tsx,css}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,html}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
+  }
+}

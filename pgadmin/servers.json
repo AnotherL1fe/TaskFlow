@@ -1,0 +1,24 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "TaskFlow (local)",
+      "Group": "TaskFlow",
+      "Host": "localhost",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Username": "postgres",
+      "Comment": "Учебный проект TaskFlow: taskflow_db (Prisma), taskflow_sql (ПМ.11), taskflow_test, taskflow_restore. Локальный кластер использует trust-аутентификацию, пароль не требуется.",
+      "Shared": 0,
+      "DBRestrictionType": "databases",
+      "UseSSHTunnel": 0,
+      "TunnelAuthentication": 0,
+      "TunnelPromptPassword": 0,
+      "TunnelKeepAlive": 0,
+      "KerberosAuthentication": 0,
+      "ConnectionParameters": {
+        "sslmode": "prefer"
+      },
+      "Tags": []
+    }
+  }
+}

@@ -1,0 +1,15 @@
+**/node_modules/
+**/dist/
+**/build/
+**/coverage/
+server/src/generated/
+package-lock.json
+backups/
+db/
+postgres/
+*.sql
+*.conf
+*.sh
+*.ps1
+*.dump
+*.backup

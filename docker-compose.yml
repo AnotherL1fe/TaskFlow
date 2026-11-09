@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: taskflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: taskflow_db
+      POSTGRES_USER: taskflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-taskflow}
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - taskflow_pgdata:/var/lib/postgresql/data
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./db/00_init.sql:/docker-entrypoint-initdb.d/00_init.sql:ro
+      - ./db/01_tables.sql:/docker-entrypoint-initdb.d/01_tables.sql:ro
+      - ./db/02_indexes.sql:/docker-entrypoint-initdb.d/02_indexes.sql:ro
+      - ./db/03_constraints.sql:/docker-entrypoint-initdb.d/03_constraints.sql:ro
+      - ./db/04_views.sql:/docker-entrypoint-initdb.d/04_views.sql:ro
+      - ./db/05_functions.sql:/docker-entrypoint-initdb.d/05_functions.sql:ro
+      - ./db/06_roles.sql:/docker-entrypoint-initdb.d/06_roles.sql:ro
+      - ./db/07_seed.sql:/docker-entrypoint-initdb.d/07_seed.sql:ro
+    command:
+      - postgres
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+      - -c
+      - hba_file=/etc/postgresql/pg_hba.conf
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U taskflow -d taskflow_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  taskflow_pgdata:
+    name: taskflow_pgdata
